@@ -16,22 +16,22 @@ def print_data(authors):
     print()
     print("Autoriai:")
     for a in authors:
-        print(f"{a["id"]}. Vardas: {a["author_name"]}, Pavardė: {a["author_surname"]}")
+        print(f"{a["id"]}. Vardas: {a["name"]}, Pavardė: {a["surname"]}")
 
 def save_data(authors):
     with open("english_authors_list.csv", mode="w", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=["id", "author_name", "author_surname"])
+        writer = csv.DictWriter(file, fieldnames=["id", "name", "surname"])
         writer.writeheader()
         writer.writerows(authors)
 
 def create_data(authors):
     print("Įtraukti naują autorių")
     print("Vardas")
-    author_name = input()
+    name = input()
     print("Pavardė")
-    author_surname = input()
+    surname = input()
     new_id = str(int(authors[-1]["id"]) + 1) if len(authors) > 0 else 1
-    authors.append({"id": new_id, "author_name": author_name, "author_surname": author_surname})
+    authors.append({"id": new_id, "name": name, "surname": surname})
     save_data(authors)
 
 def edit_data(authors):
@@ -40,11 +40,11 @@ def edit_data(authors):
     id = input()
     for a in authors:
         if id == str(a["id"]):
-            print(f"{a["id"]}. Vardas: {a["author_name"]}, Pavardė: {a["author_surname"]}")
+            print(f"{a["id"]}. Vardas: {a["name"]}, Pavardė: {a["surname"]}")
             print("Įveskite vardą:")
-            a["author_name"] = input()
+            a["name"] = input()
             print("Įveskite pavardę:")
-            a["author_surname"] = input()
+            a["surname"] = input()
             break
     save_data(authors)
 
@@ -56,7 +56,7 @@ def delete_data(authors):
     for a in authors:
         if id == str(a["id"]):
             print(f"Pašalintas:",
-                  f"{a["id"]}. Vardas: {a["author_name"]}, Pavardė: {a["author_surname"]}")
+                  f"{a["id"]}. Vardas: {a["name"]}, Pavardė: {a["surname"]}")
             del authors[authors.index(a)]
             print()
     save_data(authors)
